@@ -30,7 +30,8 @@ import { RegisterComponent } from './register/register.component';
     // OrderComponent,
     // OrderConfirmComponent,
     // LoginComponent,
-    RegisterComponent
+    // RegisterComponent
+    DetailProductComponent,
   ] // Khởi chạy trước tiên HomeComponent khi cho và bootstrap
 })
 export class AppModule { }
