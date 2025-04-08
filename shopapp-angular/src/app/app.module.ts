@@ -36,8 +36,8 @@ import { RouterModule } from '@angular/router';
     // HomeComponent,
     // OrderComponent,
     // OrderConfirmComponent,
-    // LoginComponent,
-    RegisterComponent
+    LoginComponent,
+    // RegisterComponent,
     // DetailProductComponent,
   ] // Khởi chạy trước tiên HomeComponent khi cho và bootstrap
 })
