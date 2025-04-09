@@ -9,8 +9,9 @@ import { OrderConfirmComponent } from './order-confirm/order-confirm.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { TokenInterceptorv } from './interceptors/token.interceptor';
 
 
 @NgModule({
@@ -31,7 +32,13 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     RouterModule.forRoot([]),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorv,
+      multi: true,
+    }
+  ],
   bootstrap: [
     // HomeComponent,
     // OrderComponent,

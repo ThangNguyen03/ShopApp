@@ -172,11 +172,11 @@ export class LoginComponent extends BaseComponent implements OnInit{
   
     this.userService.login(loginDTO).subscribe({
       next: (response: any) => {
-        debugger;
+        const {token} = response;
+        this.tokenService.setToken(token);
         //this.router.navigate(['/login']);
       },
       complete: () => {
-        debugger;
       },
       error: (error: any) => {
         alert(`Cannot register, error: ${error.error}`)
