@@ -2,21 +2,28 @@ package com.project.shopapp.controller;
 
 import com.project.shopapp.dto.CategoryDTO;
 import com.project.shopapp.models.Category;
+import com.project.shopapp.responses.UpdateCategoryResponse;
 import com.project.shopapp.service.CategoryService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.LocaleResolver;
 
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("api/v1/categories")
 @RequiredArgsConstructor
 public class CategoryController {
     private final CategoryService categoryService;
+    private final MessageSource messageSource;
+    private final LocaleResolver localeResolver;
 
     @GetMapping("")
     public ResponseEntity<List<Category>> getAllCategories(
@@ -28,11 +35,15 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getCategoryById(
-           @PathVariable Long id
+    public ResponseEntity<UpdateCategoryResponse> getCategoryById(
+           @PathVariable Long id,
+           HttpServletRequest request
     ) {
         Category categorie = categoryService.getCategoryById(id);
-        return ResponseEntity.ok(categorie);
+        Locale locale = localeResolver.resolveLocale(request);
+        return ResponseEntity.ok(UpdateCategoryResponse.builder().
+                message(messageSource.getMessage("category.update_category.update_successfully",null,locale))
+                .build());
     }
 
     @PostMapping
