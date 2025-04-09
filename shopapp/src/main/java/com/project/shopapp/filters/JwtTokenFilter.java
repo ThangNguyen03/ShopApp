@@ -30,6 +30,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
          try {
              if(isBypassToken(request)){
                  filterChain.doFilter(request,response);
+                 return;
              }
              final String authHeader = request.getHeader("Authorization");
              if (authHeader != null && authHeader.startsWith("Bearer ")) {
