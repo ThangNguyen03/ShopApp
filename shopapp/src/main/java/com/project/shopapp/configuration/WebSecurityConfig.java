@@ -34,14 +34,13 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(requests ->{
                     requests.requestMatchers(
                            "api/v1/users/register",
-                           "api/v1/users/login").permitAll()
+                           "api/v1/users/login","api/v1/roles").permitAll()
                     .requestMatchers(GET, "api/v1/orders/**").hasAnyRole("ADMIN","USER")
-                    .requestMatchers(GET, "api/v1/roles/**").hasAnyRole("ADMIN","USER")
                     .requestMatchers(PUT, "api/v1/orders/**").hasRole("ADMIN")
                     .requestMatchers(POST, "api/v1/orders/**").hasAnyRole(Role.USER)
                     .requestMatchers(DELETE, "api/v1/orders/**").hasRole("ADMIN")
 
-                    .requestMatchers(GET, "/api/v1/categories/**").hasAnyRole("ADMIN","USER")
+                    .requestMatchers(GET, "api/v1/categories/**").hasAnyRole("ADMIN","USER")
                     .requestMatchers(PUT, "api/v1/categories/**").hasRole("ADMIN")
                     .requestMatchers(POST, "api/v1/categories/**").hasAnyRole(Role.ADMIN)
                     .requestMatchers(DELETE, "api/v1/categories/**").hasRole("ADMIN")
