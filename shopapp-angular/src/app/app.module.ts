@@ -40,10 +40,10 @@ import { TokenInterceptorv } from './interceptors/token.interceptor';
     }
   ],
   bootstrap: [
-    // HomeComponent,
+    HomeComponent,
     // OrderComponent,
     // OrderConfirmComponent,
-    LoginComponent,
+    // LoginComponent,
     // RegisterComponent,
     // DetailProductComponent,
   ] // Khởi chạy trước tiên HomeComponent khi cho và bootstrap
