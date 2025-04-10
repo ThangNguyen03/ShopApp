@@ -51,7 +51,8 @@ export class LoginComponent extends BaseComponent implements OnInit{
     // Gọi API lấy danh sách roles và lưu vào biến roles
     debugger
     this.roleService.getRoles().subscribe({
-      next: ({ data: roles }: ApiResponse) => {
+      // next: ({ data: roles }: ApiResponse) => {
+        next: ( roles : any) => {
         this.roles = roles;
         this.selectedRole = roles.length > 0 ? roles[0] : undefined;
       },
@@ -167,7 +168,7 @@ export class LoginComponent extends BaseComponent implements OnInit{
     let loginDTO: LoginDTO = {
       "phone_number": this.phoneNumber,
       "password": this.password,
-      "role_id":1
+      "role_id":this.selectedRole?.id ?? 1
     }
   
     this.userService.login(loginDTO).subscribe({
