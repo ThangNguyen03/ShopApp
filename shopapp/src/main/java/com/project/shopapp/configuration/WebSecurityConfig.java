@@ -35,25 +35,26 @@ public class WebSecurityConfig {
                     requests.requestMatchers(
                            "api/v1/users/register",
                            "api/v1/users/login","api/v1/roles").permitAll()
-                    .requestMatchers(GET, "api/v1/orders/**").hasAnyRole("ADMIN","USER")
-                    .requestMatchers(PUT, "api/v1/orders/**").hasRole("ADMIN")
-                    .requestMatchers(POST, "api/v1/orders/**").hasAnyRole(Role.USER)
-                    .requestMatchers(DELETE, "api/v1/orders/**").hasRole("ADMIN")
+                    .requestMatchers(GET, "/api/v1/orders/**").hasAnyRole("ADMIN","USER")
+                    .requestMatchers(PUT, "/api/v1/orders/**").hasRole("ADMIN")
+                    .requestMatchers(POST, "/api/v1/orders/**").hasAnyRole(Role.USER)
+                    .requestMatchers(DELETE, "/api/v1/orders/**").hasRole("ADMIN")
 
-                    .requestMatchers(GET, "api/v1/categories/**").hasAnyRole("ADMIN","USER")
-                    .requestMatchers(PUT, "api/v1/categories/**").hasRole("ADMIN")
-                    .requestMatchers(POST, "api/v1/categories/**").hasAnyRole(Role.ADMIN)
-                    .requestMatchers(DELETE, "api/v1/categories/**").hasRole("ADMIN")
+                    .requestMatchers(GET, "/api/v1/categories/**").hasAnyRole("ADMIN","USER")
+                    .requestMatchers(PUT, "/api/v1/categories/**").hasRole("ADMIN")
+                    .requestMatchers(POST, "/api/v1/categories/**").hasAnyRole(Role.ADMIN)
+                    .requestMatchers(DELETE, "/api/v1/categories/**").hasRole("ADMIN")
 
-                    .requestMatchers(GET, "api/v1/products/**").hasAnyRole("ADMIN","USER")
-                    .requestMatchers(PUT, "api/v1/products/**").hasRole("ADMIN")
-                    .requestMatchers(POST, "api/v1/products/**").hasAnyRole(Role.ADMIN)
-                    .requestMatchers(DELETE, "api/v1/products/**").hasRole("ADMIN")
+                    .requestMatchers(GET, "/api/v1/products**").hasAnyRole("ADMIN","USER")
+                    .requestMatchers(GET, "/api/v1/products/images/*").permitAll()
+                    .requestMatchers(PUT, "/api/v1/products/**").hasRole("ADMIN")
+                    .requestMatchers(POST, "/api/v1/products/**").hasAnyRole(Role.ADMIN,Role.USER)
+                    .requestMatchers(DELETE, "/api/v1/products/**").hasRole("ADMIN")
 
-                    .requestMatchers(GET, "api/v1/order_details/**").hasAnyRole("ADMIN","USER")
-                    .requestMatchers(PUT, "api/v1/order_details/**").hasRole("ADMIN")
-                    .requestMatchers(POST, "api/v1/order_details/**").hasAnyRole(Role.USER)
-                    .requestMatchers(DELETE, "api/v1/order_details/**").hasRole("ADMIN")
+                    .requestMatchers(GET, "/api/v1/order_details/**").hasAnyRole("ADMIN","USER")
+                    .requestMatchers(PUT, "/api/v1/order_details/**").hasRole("ADMIN")
+                    .requestMatchers(POST, "/api/v1/order_details/**").hasAnyRole(Role.USER)
+                    .requestMatchers(DELETE, "/api/v1/order_details/**").hasRole("ADMIN")
                     .anyRequest().authenticated();
 
                 });

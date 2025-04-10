@@ -13,6 +13,7 @@ import com.project.shopapp.service.IProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -134,7 +135,7 @@ public class ProductController {
             @RequestParam("limit") int limit) {
 
         // Tạo Pageable từ thông tin trang và giới hạn
-        PageRequest pageRequest = PageRequest.of(page, limit, Sort.by("createdAt").descending());
+        PageRequest pageRequest = PageRequest.of(page, limit, Sort.by("id").ascending());
 
         Page<ProductResponse> productPage = productService.getAllProducts(pageRequest);
         List<ProductResponse> products = productPage.getContent();
@@ -169,7 +170,25 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-//    @PostMapping("/generateFakeProducts")
+    @GetMapping("/images/{imageName}")
+    public ResponseEntity<?> viewImage(@PathVariable String imageName) {
+        try {
+            java.nio.file.Path imagePath = Paths.get("uploads/" + imageName);
+            UrlResource resource = new UrlResource(imagePath.toUri());
+
+            if (resource.exists()) {
+                return ResponseEntity.ok()
+                        .contentType(MediaType.IMAGE_JPEG)
+                        .body(resource);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    //    @PostMapping("/generateFakeProducts")
     public ResponseEntity<String> generateFakeProducts() {
         Faker faker = new Faker();
         for (int i = 0; i < 1_000; i++) {
